@@ -5,50 +5,99 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aesthetic Portfolio | [Your Name]</title>
     <!-- Load Tailwind CSS -->
+    <!-- Switched from the experimental JIT CDN to the stable, pre-compiled version (v2.2.19) for reliable hosting. -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.js"></script>
     <!-- Load Inter font via Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <style>
-    /* ... existing styles ... */
-    /* ADD THIS TEMPORARY STYLE */
-    body {
-        background-color: lightgray !important; /* Make sure the background is visible */
-    }
-    main, header {
-        border: 1px solid red; /* Add a border to the main container */
-    }
-    /* ... existing styles ... */
-</style>
-    <!-- Tailwind Configuration: Set custom colors and font -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'primary-blue': '#6366F1', // Indigo-500 for main accent
-                        'soft-bg': '#f7f7f9',
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                }
-            }
+        /* Define CSS variable for consistent custom styling */
+        :root {
+            --color-primary: #4f46e5; /* Tailwind indigo-600 */
         }
-    </script>
+
+        /* Apply Inter font family */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f7f9; /* Light, calming off-white background */
+        }
+        /* Custom styles for subtle hover and focus */
+        .btn-primary {
+            transition: all 0.2s ease-in-out;
+        }
+        .btn-primary:hover {
+            /* Updated shadow color based on indigo-600 */
+            box-shadow: 0 8px 15px rgba(79, 70, 229, 0.4); 
+            transform: translateY(-2px);
+        }
+        .card-hover {
+            transition: all 0.3s ease-in-out;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+        }
+        /* Fade-in animation class */
+        .fade-in-item {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.75);
+            z-index: 50;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-y: auto;
+        }
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            max-width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            width: 768px; /* max-w-3xl equivalent */
+            transform: scale(0.95);
+            opacity: 0;
+            transition: all 0.3s ease-in-out;
+        }
+        .modal-overlay.active {
+            display: flex;
+        }
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+            opacity: 1;
+        }
+        /* Hide while not active */
+        .modal-overlay.hidden {
+            display: none;
+        }
+    </style>
 </head>
 <body class="text-gray-800 antialiased">
 
     <!-- Header / Navbar (Sticky on scroll if desired) -->
     <header class="sticky top-0 z-20 bg-white/95 backdrop-blur-sm border-b border-gray-100 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-            <h1 class="text-xl font-extrabold text-primary-blue tracking-wider">
+            <h1 class="text-xl font-extrabold text-indigo-700 tracking-wider">
                 [YOUR NAME]
             </h1>
             <nav class="hidden md:flex space-x-8 text-sm font-medium">
-                <a href="#about" class="hover:text-primary-blue transition duration-200">About</a>
-                <a href="#skills" class="hover:text-primary-blue transition duration-200">Skills</a>
-                <a href="#portfolio" class="hover:text-primary-blue transition duration-200">Projects</a>
-                <a href="#contact" class="hover:text-primary-blue transition duration-200">Contact</a>
+                <a href="#about" class="hover:text-indigo-600 transition duration-200">About</a>
+                <a href="#skills" class="hover:text-indigo-600 transition duration-200">Skills</a>
+                <a href="#portfolio" class="hover:text-indigo-600 transition duration-200">Projects</a>
+                <a href="#contact" class="hover:text-indigo-600 transition duration-200">Contact</a>
             </nav>
         </div>
     </header>
@@ -62,9 +111,9 @@
                     <img id="profile-photo" src="https://placehold.co/160x160/D1D5DB/6B7280?text=JD"
                          alt="Profile Photo"
                          class="w-full h-full rounded-full object-cover shadow-xl ring-4 ring-white">
-                    <button id="upload-photo-btn" title="Upload Profile Photo" class="absolute bottom-0 right-0 p-2 bg-white rounded-full shadow-lg border border-gray-200 hover:bg-primary-blue/20 transition">
+                    <button id="upload-photo-btn" title="Upload Profile Photo" class="absolute bottom-0 right-0 p-2 bg-white rounded-full shadow-lg border border-gray-200 hover:bg-indigo-600/20 transition">
                         <!-- Camera/Edit Icon -->
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-primary-blue" viewBox="0 0 20 20" fill="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-indigo-600" viewBox="0 0 20 20" fill="currentColor">
                             <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zm-2.5 1.414a1 1 0 011.414 0l.707.707L10.293 7.707 9.586 7l1.414-1.414zM4 10v6h6l.293-.293 5.414-5.414L15 8l-5-5-5 5v2zm8-2h2v2h-2V8z" />
                         </svg>
                     </button>
@@ -82,11 +131,11 @@
 
                 <!-- Call-to-Action Buttons -->
                 <div class="flex space-x-4">
-                    <a onclick="openModal('project-atlas-modal')" class="btn-primary bg-primary-blue text-white px-8 py-3 rounded-xl font-semibold shadow-md hover:shadow-lg transition cursor-pointer">
+                    <a onclick="openModal('project-atlas-modal')" class="btn-primary bg-indigo-600 text-white px-8 py-3 rounded-xl font-semibold shadow-md hover:shadow-lg transition cursor-pointer">
                         View My Work
                     </a>
                     <!-- CV Action Button: Will trigger download or upload based on JS state -->
-                    <a href="#" id="cv-action-btn" class="btn-primary border border-primary-blue text-primary-blue px-8 py-3 rounded-xl font-semibold hover:bg-primary-blue/10 transition">
+                    <a href="#" id="cv-action-btn" class="btn-primary border border-indigo-600 text-indigo-600 px-8 py-3 rounded-xl font-semibold hover:bg-indigo-600/10 transition">
                         Download CV (None Uploaded)
                     </a>
                 </div>
@@ -117,32 +166,32 @@
 
                     <!-- Skill Card 1: UI Design -->
                     <div class="p-6 bg-white rounded-xl text-center shadow-md card-hover">
-                        <span class="text-4xl text-primary-blue mb-3 inline-block">🎨</span>
+                        <span class="text-4xl text-indigo-600 mb-3 inline-block">🎨</span>
                         <p class="font-medium text-sm">UI Design</p>
                     </div>
                     <!-- Skill Card 2: UX Research -->
                     <div class="p-6 bg-white rounded-xl text-center shadow-md card-hover">
-                        <span class="text-4xl text-primary-blue mb-3 inline-block">🔍</span>
+                        <span class="text-4xl text-indigo-600 mb-3 inline-block">🔍</span>
                         <p class="font-medium text-sm">UX Research</p>
                     </div>
                     <!-- Skill Card 3: Front-End Dev -->
                     <div class="p-6 bg-white rounded-xl text-center shadow-md card-hover">
-                        <span class="text-4xl text-primary-blue mb-3 inline-block">💻</span>
+                        <span class="text-4xl text-indigo-600 mb-3 inline-block">💻</span>
                         <p class="font-medium text-sm">Front-End Dev</p>
                     </div>
                     <!-- Skill Card 4: Data Analysis -->
                     <div class="p-6 bg-white rounded-xl text-center shadow-md card-hover">
-                        <span class="text-4xl text-primary-blue mb-3 inline-block">📊</span>
+                        <span class="text-4xl text-indigo-600 mb-3 inline-block">📊</span>
                         <p class="font-medium text-sm">Data Analysis</p>
                     </div>
                     <!-- Skill Card 5: Agile Methodologies -->
                     <div class="p-6 bg-white rounded-xl text-center shadow-md card-hover">
-                        <span class="text-4xl text-primary-blue mb-3 inline-block">🚀</span>
+                        <span class="text-4xl text-indigo-600 mb-3 inline-block">🚀</span>
                         <p class="font-medium text-sm">Agile/Scrum</p>
                     </div>
                     <!-- Skill Card 6: Figma -->
                     <div class="p-6 bg-white rounded-xl text-center shadow-md card-hover">
-                        <span class="text-4xl text-primary-blue mb-3 inline-block">🖼️</span>
+                        <span class="text-4xl text-indigo-600 mb-3 inline-block">🖼️</span>
                         <p class="font-medium text-sm">Figma</p>
                     </div>
                 </div>
@@ -165,7 +214,7 @@
                                 Led the end-to-end UX/UI redesign for a complex B2B analytics platform, resulting in a 30% reduction in average task completion time.
                             </p>
                             <!-- Updated to open modal -->
-                            <a onclick="openModal('project-atlas-modal')" class="text-primary-blue font-medium text-sm hover:underline cursor-pointer">
+                            <a onclick="openModal('project-atlas-modal')" class="text-indigo-600 font-medium text-sm hover:underline cursor-pointer">
                                 View Project &rarr;
                             </a>
                         </div>
@@ -180,7 +229,7 @@
                                 Developed a fully modular component library using React and Tailwind, improving front-end efficiency by 45% across multiple teams.
                             </p>
                             <!-- Updated to open modal -->
-                            <a onclick="openModal('ecommerce-modal')" class="text-primary-blue font-medium text-sm hover:underline cursor-pointer">
+                            <a onclick="openModal('ecommerce-modal')" class="text-indigo-600 font-medium text-sm hover:underline cursor-pointer">
                                 View Project &rarr;
                             </a>
                         </div>
@@ -197,9 +246,9 @@
                 <div class="space-y-10">
                     <!-- Job 1 -->
                     <div class="relative pl-8">
-                        <div class="absolute left-0 top-1 w-2.5 h-2.5 bg-primary-blue rounded-full ring-4 ring-primary-blue/20"></div>
+                        <div class="absolute left-0 top-1 w-2.5 h-2.5 bg-indigo-600 rounded-full ring-4 ring-indigo-600/20"></div>
                         <h4 class="text-xl font-bold text-gray-900">Lead UX Designer</h4>
-                        <p class="text-primary-blue font-medium mb-1">TechCorp Global | 2022 - Present</p>
+                        <p class="text-indigo-600 font-medium mb-1">TechCorp Global | 2022 - Present</p>
                         <ul class="list-disc ml-5 text-gray-600 text-sm space-y-1">
                             <li>Managed a team of 3 designers, overseeing the complete product lifecycle for two flagship products.</li>
                             <li>Implemented A/B testing strategies that led to a 15% improvement in user activation rate.</li>
@@ -239,19 +288,19 @@
                     <div>
                         <!-- name="Name" is required by Formspree -->
                         <input type="text" name="Name" placeholder="Your Name" required
-                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-blue focus:border-primary-blue outline-none transition">
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-indigo-600 outline-none transition">
                     </div>
                     <div>
                         <!-- name="_replyto" is required by Formspree for the client's email -->
                         <input type="email" name="_replyto" placeholder="Your Email" required
-                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-blue focus:border-primary-blue outline-none transition">
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-indigo-600 outline-none transition">
                     </div>
                     <div>
                         <!-- name="Message" is required by Formspree -->
                         <textarea name="Message" placeholder="Your Message" rows="5" required
-                                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-blue focus:border-primary-blue outline-none transition"></textarea>
+                                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-indigo-600 outline-none transition"></textarea>
                     </div>
-                    <button type="submit" class="btn-primary w-full bg-primary-blue text-white px-6 py-3 rounded-xl font-semibold shadow-md transition">
+                    <button type="submit" class="btn-primary w-full bg-indigo-600 text-white px-6 py-3 rounded-xl font-semibold shadow-md transition">
                         Send Message
                     </button>
                     <!-- Success/Error Message Area -->
@@ -261,15 +310,15 @@
                 <!-- Social Links -->
                 <div class="flex justify-center space-x-6 mt-8">
                     <!-- LinkedIn Icon -->
-                    <a href="#" target="_blank" aria-label="LinkedIn" class="text-gray-500 hover:text-primary-blue transition">
+                    <a href="#" target="_blank" aria-label="LinkedIn" class="text-gray-500 hover:text-indigo-600 transition">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                     </a>
                     <!-- Email Icon -->
-                    <a href="mailto:youremail@example.com" aria-label="Email" class="text-gray-500 hover:text-primary-blue transition">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3v18h24v-18h-24zm6.623 12.771l-6.623-5.714v-3.057l12 10.371 12-10.371v3.057l-6.623 5.714 6.623 5.714h-18z"/></svg>
+                    <a href="mailto:youremail@example.com" aria-label="Email" class="text-gray-500 hover:text-indigo-600 transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3v18h24v-18h-24zm6.623 12.771l-6.623-5.714v-3.057l12 10.371l12-10.371v3.057l-6.623 5.714 6.623 5.714h-18z"/></svg>
                     </a>
                     <!-- JobStreet Placeholder -->
-                    <a href="#" target="_blank" aria-label="JobStreet" class="text-gray-500 hover:text-primary-blue transition">
+                    <a href="#" target="_blank" aria-label="JobStreet" class="text-gray-500 hover:text-indigo-600 transition">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M22 6h-6v4h-2v4h-2v-4h-2v-4h-2v4h2v4h-2v4h2v-4h2v4h-2v4h6v-4h2v-4h-2v-4h2z"/></svg>
                     </a>
                 </div>
@@ -287,13 +336,13 @@
             <p class="text-lg text-gray-700 leading-relaxed mb-6">
                 The Atlas platform was a complex enterprise tool suffering from low user adoption due to an overly dense and non-intuitive interface. We initiated a comprehensive redesign, starting with in-depth user interviews and journey mapping. The solution involved simplifying the primary navigation, introducing modular dashboards, and adopting a strict design system. This effort successfully increased key feature usage by 40% in the first quarter post-launch.
             </p>
-            <h5 class="font-bold text-lg mb-2 text-primary-blue">Key Outcomes:</h5>
+            <h5 class="font-bold text-lg mb-2 text-indigo-600">Key Outcomes:</h5>
             <ul class="list-disc ml-5 text-gray-600 space-y-1 mb-6 text-sm">
                 <li>Reduced average task completion time by 30%.</li>
                 <li>Created a scalable, responsive design system in Figma.</li>
                 <li>Established a unified visual language across all platform modules.</li>
             </ul>
-            <button onclick="closeModal('project-atlas-modal')" class="bg-primary-blue text-white px-6 py-2 rounded-xl hover:bg-indigo-700 transition font-medium">
+            <button onclick="closeModal('project-atlas-modal')" class="bg-indigo-600 text-white px-6 py-2 rounded-xl hover:bg-indigo-700 transition font-medium">
                 Close Project View
             </button>
         </div>
@@ -307,13 +356,13 @@
             <p class="text-lg text-gray-700 leading-relaxed mb-6">
                 This project focused on the development of a high-performance, reusable component library for our main e-commerce storefront. Using React, TypeScript, and Tailwind CSS, we built atomic components that could be easily assembled into different page layouts. This approach dramatically streamlined the development process for campaign pages and seasonal updates.
             </p>
-            <h5 class="font-bold text-lg mb-2 text-primary-blue">Key Outcomes:</h5>
+            <h5 class="font-bold text-lg mb-2 text-indigo-600">Key Outcomes:</h5>
             <ul class="list-disc ml-5 text-gray-600 space-y-1 mb-6 text-sm">
                 <li>Improved front-end development speed by 45%.</li>
                 <li>Achieved a 95+ score on Google PageSpeed Insights.</li>
                 <li>Created detailed documentation for component usage, accelerating new developer onboarding.</li>
             </ul>
-            <button onclick="closeModal('ecommerce-modal')" class="bg-primary-blue text-white px-6 py-2 rounded-xl hover:bg-indigo-700 transition font-medium">
+            <button onclick="closeModal('ecommerce-modal')" class="bg-indigo-600 text-white px-6 py-2 rounded-xl hover:bg-indigo-700 transition font-medium">
                 Close Project View
             </button>
         </div>
@@ -559,10 +608,10 @@
         function showMessage(text, type) {
             const messageDiv = document.getElementById('form-message');
             messageDiv.textContent = text;
-            messageDiv.classList.remove('hidden', 'text-primary-blue', 'text-red-500', 'text-gray-500');
+            messageDiv.classList.remove('hidden', 'text-indigo-600', 'text-red-500', 'text-gray-500');
             
             if (type === 'success') {
-                messageDiv.classList.add('text-primary-blue');
+                messageDiv.classList.add('text-indigo-600');
             } else if (type === 'error') {
                 messageDiv.classList.add('text-red-500');
             } else if (type === 'sending') {
@@ -632,6 +681,4 @@
         });
     </script>
 </body>
-
 </html>
-
