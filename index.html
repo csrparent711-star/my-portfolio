@@ -4,16 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aesthetic Portfolio | [Your Name]</title>
-    <!-- Load Tailwind CSS: Using the official, modern CDN for better compatibility and JIT compilation -->
+    <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Load Inter font via Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <style>
-        /* Define CSS variable for consistent custom styling */
-        :root {
-            --color-primary: #4f46e5; /* Tailwind indigo-600 */
-        }
-
         /* Apply Inter font family */
         body {
             font-family: 'Inter', sans-serif;
@@ -24,8 +19,7 @@
             transition: all 0.2s ease-in-out;
         }
         .btn-primary:hover {
-            /* Updated shadow color based on indigo-600 */
-            box-shadow: 0 8px 15px rgba(79, 70, 229, 0.4); 
+            box-shadow: 0 8px 15px rgba(99, 102, 241, 0.4); /* Tailwind indigo-500 shadow */
             transform: translateY(-2px);
         }
         .card-hover {
@@ -45,58 +39,38 @@
             opacity: 1;
             transform: translateY(0);
         }
-        /* Modal Styles */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.75);
-            z-index: 50;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow-y: auto;
-        }
-        .modal-content {
-            background: white;
-            padding: 2rem;
-            border-radius: 1rem;
-            max-width: 90%;
-            max-height: 90vh;
-            overflow-y: auto;
-            width: 768px; /* max-w-3xl equivalent */
-            transform: scale(0.95);
-            opacity: 0;
-            transition: all 0.3s ease-in-out;
-        }
-        .modal-overlay.active {
-            display: flex;
-        }
-        .modal-overlay.active .modal-content {
-            transform: scale(1);
-            opacity: 1;
-        }
-        /* Hide while not active */
-        .modal-overlay.hidden {
-            display: none;
-        }
     </style>
+    <!-- Tailwind Configuration: Set custom colors and font -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-blue': '#6366F1', // Indigo-500 for main accent
+                        'soft-bg': '#f7f7f9',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
 </head>
 <body class="text-gray-800 antialiased">
 
     <!-- Header / Navbar (Sticky on scroll if desired) -->
-    <header class="sticky top-0 z-20 bg-white/95 backdrop-blur-sm border-b border-gray-100 shadow-sm">
+    <header class="sticky top-0 z-10 bg-white/95 backdrop-blur-sm border-b border-gray-100 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-            <h1 class="text-xl font-extrabold text-indigo-700 tracking-wider">
+            <h1 class="text-xl font-extrabold text-primary-blue tracking-wider">
                 [YOUR NAME]
             </h1>
             <nav class="hidden md:flex space-x-8 text-sm font-medium">
-                <a href="#about" class="hover:text-indigo-600 transition duration-200">About</a>
-                <a href="#skills" class="hover:text-indigo-600 transition duration-200">Skills</a>
-                <a href="#portfolio" class="hover:text-indigo-600 transition duration-200">Projects</a>
-                <a href="#contact" class="hover:text-indigo-600 transition duration-200">Contact</a>
+                <a href="#about" class="hover:text-primary-blue transition duration-200">About</a>
+                <a href="#ai-assistant" class="hover:text-primary-blue transition duration-200">AI Tool</a>
+                <a href="#skills" class="hover:text-primary-blue transition duration-200">Skills</a>
+                <a href="#portfolio" class="hover:text-primary-blue transition duration-200">Projects</a>
+                <a href="#contact" class="hover:text-primary-blue transition duration-200">Contact</a>
             </nav>
         </div>
     </header>
@@ -105,21 +79,10 @@
         <!-- 1. HERO SECTION -->
         <section id="hero" class="py-24 md:py-36 px-4 text-center fade-in-item">
             <div class="flex flex-col items-center max-w-4xl mx-auto">
-                <!-- Circular Headshot/Upload Area -->
-                <div class="relative w-40 h-40 rounded-full mb-6">
-                    <img id="profile-photo" src="https://placehold.co/160x160/D1D5DB/6B7280?text=JD"
-                         alt="Profile Photo"
-                         class="w-full h-full rounded-full object-cover shadow-xl ring-4 ring-white">
-                    <button id="upload-photo-btn" title="Upload Profile Photo" class="absolute bottom-0 right-0 p-2 bg-white rounded-full shadow-lg border border-gray-200 hover:bg-indigo-600/20 transition">
-                        <!-- Camera/Edit Icon -->
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-indigo-600" viewBox="0 0 20 20" fill="currentColor">
-                            <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zm-2.5 1.414a1 1 0 011.414 0l.707.707L10.293 7.707 9.586 7l1.414-1.414zM4 10v6h6l.293-.293 5.414-5.414L15 8l-5-5-5 5v2zm8-2h2v2h-2V8z" />
-                        </svg>
-                    </button>
-                </div>
-                <!-- Hidden file input for photo upload -->
-                <input type="file" id="photo-upload-input" accept="image/*" class="hidden">
-
+                <!-- Circular Headshot Placeholder -->
+                <img src="https://placehold.co/160x160/D1D5DB/6B7280?text=JD"
+                     alt="Professional Headshot"
+                     class="w-40 h-40 rounded-full object-cover shadow-xl ring-4 ring-white mb-6">
 
                 <h2 class="text-5xl md:text-7xl font-extrabold text-gray-900 leading-tight mb-4">
                     [Jane Doe]
@@ -130,16 +93,13 @@
 
                 <!-- Call-to-Action Buttons -->
                 <div class="flex space-x-4">
-                    <a onclick="openModal('project-atlas-modal')" class="btn-primary bg-indigo-600 text-white px-8 py-3 rounded-xl font-semibold shadow-md hover:shadow-lg transition cursor-pointer">
+                    <a href="#portfolio" class="btn-primary bg-primary-blue text-white px-8 py-3 rounded-xl font-semibold shadow-md hover:shadow-lg transition">
                         View My Work
                     </a>
-                    <!-- CV Action Button: Will trigger download or upload based on JS state -->
-                    <a href="#" id="cv-action-btn" class="btn-primary border border-indigo-600 text-indigo-600 px-8 py-3 rounded-xl font-semibold hover:bg-indigo-600/10 transition">
-                        Download CV (None Uploaded)
+                    <a href="#" class="btn-primary border border-primary-blue text-primary-blue px-8 py-3 rounded-xl font-semibold hover:bg-primary-blue/10 transition">
+                        Download CV
                     </a>
                 </div>
-                <!-- Hidden file input for CV upload -->
-                <input type="file" id="cv-upload-input" accept=".pdf" class="hidden">
             </div>
         </section>
         
@@ -155,6 +115,39 @@
             </div>
         </section>
         
+        <!-- NEW: ✨ AI WRITING ASSISTANT SECTION (Powered by Gemini) -->
+        <section id="ai-assistant" class="py-10 md:py-14 bg-white px-4 fade-in-item">
+            <div class="max-w-3xl mx-auto">
+                <h3 class="text-3xl font-bold mb-6 text-gray-900 text-center">✨ AI Content Polisher</h3>
+                <div class="p-6 bg-soft-bg rounded-xl shadow-md border border-gray-100">
+                    <p class="text-gray-600 mb-4 text-center text-sm">
+                        Use Gemini to turn rough notes or keywords into a punchy tagline or a professional summary.
+                    </p>
+                    <div class="space-y-4">
+                        <textarea id="ai-input" placeholder="Enter keywords, a rough draft, or your desired role/outcome (e.g., 'Senior Developer with 5 years experience, loves React and Python')" rows="4"
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-blue focus:border-primary-blue outline-none transition"></textarea>
+                        
+                        <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
+                            <button id="generate-tagline-btn" class="btn-primary flex-1 bg-primary-blue text-white px-6 py-3 rounded-xl font-semibold shadow-md transition disabled:opacity-50">
+                                ✨ Generate Tagline (Hero)
+                            </button>
+                            <button id="generate-summary-btn" class="btn-primary flex-1 bg-indigo-400 text-white px-6 py-3 rounded-xl font-semibold shadow-md transition disabled:opacity-50">
+                                ✨ Generate Summary (About)
+                            </button>
+                        </div>
+                        
+                        <div id="ai-output-container" class="mt-4 hidden p-4 border border-indigo-200 bg-indigo-50 rounded-xl">
+                            <p class="font-bold text-gray-800 mb-2">Generated Text:</p>
+                            <p id="ai-output" class="text-sm text-gray-700 whitespace-pre-wrap"></p>
+                            <button id="copy-output-btn" class="mt-4 bg-white text-primary-blue text-xs px-3 py-1 rounded-full border border-indigo-300 hover:bg-indigo-100 transition">Copy to Clipboard</button>
+                        </div>
+                        <div id="ai-loading" class="text-center font-medium text-primary-blue hidden">Generating content... please wait.</div>
+                        <div id="ai-error" class="text-center font-medium text-red-500 hidden"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
         <div class="border-t border-gray-100 mx-4"></div>
 
         <!-- 3. SKILLS SECTION -->
@@ -165,32 +158,32 @@
 
                     <!-- Skill Card 1: UI Design -->
                     <div class="p-6 bg-white rounded-xl text-center shadow-md card-hover">
-                        <span class="text-4xl text-indigo-600 mb-3 inline-block">🎨</span>
+                        <span class="text-4xl text-primary-blue mb-3 inline-block">🎨</span>
                         <p class="font-medium text-sm">UI Design</p>
                     </div>
                     <!-- Skill Card 2: UX Research -->
                     <div class="p-6 bg-white rounded-xl text-center shadow-md card-hover">
-                        <span class="text-4xl text-indigo-600 mb-3 inline-block">🔍</span>
+                        <span class="text-4xl text-primary-blue mb-3 inline-block">🔍</span>
                         <p class="font-medium text-sm">UX Research</p>
                     </div>
                     <!-- Skill Card 3: Front-End Dev -->
                     <div class="p-6 bg-white rounded-xl text-center shadow-md card-hover">
-                        <span class="text-4xl text-indigo-600 mb-3 inline-block">💻</span>
+                        <span class="text-4xl text-primary-blue mb-3 inline-block">💻</span>
                         <p class="font-medium text-sm">Front-End Dev</p>
                     </div>
                     <!-- Skill Card 4: Data Analysis -->
                     <div class="p-6 bg-white rounded-xl text-center shadow-md card-hover">
-                        <span class="text-4xl text-indigo-600 mb-3 inline-block">📊</span>
+                        <span class="text-4xl text-primary-blue mb-3 inline-block">📊</span>
                         <p class="font-medium text-sm">Data Analysis</p>
                     </div>
                     <!-- Skill Card 5: Agile Methodologies -->
                     <div class="p-6 bg-white rounded-xl text-center shadow-md card-hover">
-                        <span class="text-4xl text-indigo-600 mb-3 inline-block">🚀</span>
+                        <span class="text-4xl text-primary-blue mb-3 inline-block">🚀</span>
                         <p class="font-medium text-sm">Agile/Scrum</p>
                     </div>
                     <!-- Skill Card 6: Figma -->
                     <div class="p-6 bg-white rounded-xl text-center shadow-md card-hover">
-                        <span class="text-4xl text-indigo-600 mb-3 inline-block">🖼️</span>
+                        <span class="text-4xl text-primary-blue mb-3 inline-block">🖼️</span>
                         <p class="font-medium text-sm">Figma</p>
                     </div>
                 </div>
@@ -204,7 +197,7 @@
                 
                 <div class="grid md:grid-cols-2 gap-10">
 
-                    <!-- Project Card 1: Project Atlas -->
+                    <!-- Project Card 1 -->
                     <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
                         <img src="https://placehold.co/800x500/A5B4FC/4338CA?text=Project+Atlas+UI" alt="Project 1 Screenshot" class="w-full h-48 object-cover">
                         <div class="p-6">
@@ -212,14 +205,13 @@
                             <p class="text-gray-600 mb-4 text-sm">
                                 Led the end-to-end UX/UI redesign for a complex B2B analytics platform, resulting in a 30% reduction in average task completion time.
                             </p>
-                            <!-- Updated to open modal -->
-                            <a onclick="openModal('project-atlas-modal')" class="text-indigo-600 font-medium text-sm hover:underline cursor-pointer">
+                            <a href="#" class="text-primary-blue font-medium text-sm hover:underline">
                                 View Project &rarr;
                             </a>
                         </div>
                     </div>
 
-                    <!-- Project Card 2: Modular E-commerce -->
+                    <!-- Project Card 2 -->
                     <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
                         <img src="https://placehold.co/800x500/D1D5DB/4B5563?text=E-commerce+Platform" alt="Project 2 Screenshot" class="w-full h-48 object-cover">
                         <div class="p-6">
@@ -227,8 +219,7 @@
                             <p class="text-gray-600 mb-4 text-sm">
                                 Developed a fully modular component library using React and Tailwind, improving front-end efficiency by 45% across multiple teams.
                             </p>
-                            <!-- Updated to open modal -->
-                            <a onclick="openModal('ecommerce-modal')" class="text-indigo-600 font-medium text-sm hover:underline cursor-pointer">
+                            <a href="#" class="text-primary-blue font-medium text-sm hover:underline">
                                 View Project &rarr;
                             </a>
                         </div>
@@ -245,9 +236,9 @@
                 <div class="space-y-10">
                     <!-- Job 1 -->
                     <div class="relative pl-8">
-                        <div class="absolute left-0 top-1 w-2.5 h-2.5 bg-indigo-600 rounded-full ring-4 ring-indigo-600/20"></div>
+                        <div class="absolute left-0 top-1 w-2.5 h-2.5 bg-primary-blue rounded-full ring-4 ring-primary-blue/20"></div>
                         <h4 class="text-xl font-bold text-gray-900">Lead UX Designer</h4>
-                        <p class="text-indigo-600 font-medium mb-1">TechCorp Global | 2022 - Present</p>
+                        <p class="text-primary-blue font-medium mb-1">TechCorp Global | 2022 - Present</p>
                         <ul class="list-disc ml-5 text-gray-600 text-sm space-y-1">
                             <li>Managed a team of 3 designers, overseeing the complete product lifecycle for two flagship products.</li>
                             <li>Implemented A/B testing strategies that led to a 15% improvement in user activation rate.</li>
@@ -276,30 +267,21 @@
                     Have a project in mind or want to discuss a role? I'm currently open to new opportunities.
                 </p>
 
-                <!-- 
-                    FORM NOW INTEGRATED WITH FORMSPREE
-                    The action attribute must contain your unique Formspree endpoint.
-                -->
-                <form id="contact-form" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST" class="space-y-4 p-6 bg-white rounded-xl shadow-lg border border-gray-100">
-                    <p class="text-green-600 text-sm font-semibold text-center mb-4">
-                        ✅ Form is set up for automatic email delivery using Formspree.
-                    </p>
+                <!-- Simple Contact Form Mockup -->
+                <form id="contact-form" class="space-y-4 p-6 bg-white rounded-xl shadow-lg border border-gray-100">
                     <div>
-                        <!-- name="Name" is required by Formspree -->
-                        <input type="text" name="Name" placeholder="Your Name" required
-                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-indigo-600 outline-none transition">
+                        <input type="text" placeholder="Your Name" required
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-blue focus:border-primary-blue outline-none transition">
                     </div>
                     <div>
-                        <!-- name="_replyto" is required by Formspree for the client's email -->
-                        <input type="email" name="_replyto" placeholder="Your Email" required
-                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-indigo-600 outline-none transition">
+                        <input type="email" placeholder="Your Email" required
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-blue focus:border-primary-blue outline-none transition">
                     </div>
                     <div>
-                        <!-- name="Message" is required by Formspree -->
-                        <textarea name="Message" placeholder="Your Message" rows="5" required
-                                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-indigo-600 outline-none transition"></textarea>
+                        <textarea placeholder="Your Message" rows="5" required
+                                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-blue focus:border-primary-blue outline-none transition"></textarea>
                     </div>
-                    <button type="submit" class="btn-primary w-full bg-indigo-600 text-white px-6 py-3 rounded-xl font-semibold shadow-md transition">
+                    <button type="submit" class="btn-primary w-full bg-primary-blue text-white px-6 py-3 rounded-xl font-semibold shadow-md transition">
                         Send Message
                     </button>
                     <!-- Success/Error Message Area -->
@@ -309,15 +291,15 @@
                 <!-- Social Links -->
                 <div class="flex justify-center space-x-6 mt-8">
                     <!-- LinkedIn Icon -->
-                    <a href="#" target="_blank" aria-label="LinkedIn" class="text-gray-500 hover:text-indigo-600 transition">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.762-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                    <a href="#" target="_blank" aria-label="LinkedIn" class="text-gray-500 hover:text-primary-blue transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                     </a>
                     <!-- Email Icon -->
-                    <a href="mailto:youremail@example.com" aria-label="Email" class="text-gray-500 hover:text-indigo-600 transition">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3v18h24v-18h-24zm6.623 12.771l-6.623-5.714v-3.057l12 10.371l12-10.371v3.057l-6.623 5.714 6.623 5.714h-18z"/></svg>
+                    <a href="mailto:youremail@example.com" aria-label="Email" class="text-gray-500 hover:text-primary-blue transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3v18h24v-18h-24zm6.623 12.771l-6.623-5.714v-3.057l12 10.371 12-10.371v3.057l-6.623 5.714 6.623 5.714h-18z"/></svg>
                     </a>
-                    <!-- JobStreet Placeholder -->
-                    <a href="#" target="_blank" aria-label="JobStreet" class="text-gray-500 hover:text-indigo-600 transition">
+                    <!-- JobStreet Placeholder (could be a custom icon or just LinkedIn/Email) -->
+                    <a href="#" target="_blank" aria-label="JobStreet" class="text-gray-500 hover:text-primary-blue transition">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M22 6h-6v4h-2v4h-2v-4h-2v-4h-2v4h2v4h-2v4h2v-4h2v4h-2v4h6v-4h2v-4h-2v-4h2z"/></svg>
                     </a>
                 </div>
@@ -325,48 +307,6 @@
         </section>
     </main>
 
-    <!-- PROJECT MODALS (Detail Views) -->
-
-    <!-- Modal 1: Project Atlas Detail -->
-    <div id="project-atlas-modal" class="modal-overlay hidden" onclick="closeModal('project-atlas-modal')">
-        <div class="modal-content shadow-2xl" onclick="event.stopPropagation()">
-            <h4 class="text-3xl font-bold text-gray-900 mb-4">Project Atlas Re-Design</h4>
-            <p class="text-sm text-gray-600 mb-6 border-b pb-4">UI/UX, Analytics Platform, B2B</p>
-            <p class="text-lg text-gray-700 leading-relaxed mb-6">
-                The Atlas platform was a complex enterprise tool suffering from low user adoption due to an overly dense and non-intuitive interface. We initiated a comprehensive redesign, starting with in-depth user interviews and journey mapping. The solution involved simplifying the primary navigation, introducing modular dashboards, and adopting a strict design system. This effort successfully increased key feature usage by 40% in the first quarter post-launch.
-            </p>
-            <h5 class="font-bold text-lg mb-2 text-indigo-600">Key Outcomes:</h5>
-            <ul class="list-disc ml-5 text-gray-600 space-y-1 mb-6 text-sm">
-                <li>Reduced average task completion time by 30%.</li>
-                <li>Created a scalable, responsive design system in Figma.</li>
-                <li>Established a unified visual language across all platform modules.</li>
-            </ul>
-            <button onclick="closeModal('project-atlas-modal')" class="bg-indigo-600 text-white px-6 py-2 rounded-xl hover:bg-indigo-700 transition font-medium">
-                Close Project View
-            </button>
-        </div>
-    </div>
-
-    <!-- Modal 2: Modular E-commerce System Detail -->
-    <div id="ecommerce-modal" class="modal-overlay hidden" onclick="closeModal('ecommerce-modal')">
-        <div class="modal-content shadow-2xl" onclick="event.stopPropagation()">
-            <h4 class="text-3xl font-bold text-gray-900 mb-4">Modular E-commerce System</h4>
-            <p class="text-sm text-gray-600 mb-6 border-b pb-4">React Development, Component Library, Performance Optimization</p>
-            <p class="text-lg text-gray-700 leading-relaxed mb-6">
-                This project focused on the development of a high-performance, reusable component library for our main e-commerce storefront. Using React, TypeScript, and Tailwind CSS, we built atomic components that could be easily assembled into different page layouts. This approach dramatically streamlined the development process for campaign pages and seasonal updates.
-            </p>
-            <h5 class="font-bold text-lg mb-2 text-indigo-600">Key Outcomes:</h5>
-            <ul class="list-disc ml-5 text-gray-600 space-y-1 mb-6 text-sm">
-                <li>Improved front-end development speed by 45%.</li>
-                <li>Achieved a 95+ score on Google PageSpeed Insights.</li>
-                <li>Created detailed documentation for component usage, accelerating new developer onboarding.</li>
-            </ul>
-            <button onclick="closeModal('ecommerce-modal')" class="bg-indigo-600 text-white px-6 py-2 rounded-xl hover:bg-indigo-700 transition font-medium">
-                Close Project View
-            </button>
-        </div>
-    </div>
-    
     <!-- FOOTER -->
     <footer class="bg-gray-100 py-8 mt-12 fade-in-item">
         <div class="max-w-7xl mx-auto px-4 text-center text-sm text-gray-500">
@@ -374,317 +314,164 @@
         </div>
     </footer>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, setDoc, getDoc, collection, onSnapshot, query, limit } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-        
-        // --- GLOBAL CONFIG & FIREBASE INITIALIZATION ---
-        // Global variables provided by the Canvas environment (MUST be used)
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
-        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+    <script>
+        // --- GEMINI API CONFIGURATION AND FUNCTIONS ---
+        const API_KEY = "";
+        const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${API_KEY}`;
+        const MAX_RETRIES = 5;
 
-        let db;
-        let auth;
-        let currentUserId = null;
-        let cvDataStored = null; // Store the CV object {data, filename}
+        // Function for making API calls with exponential backoff
+        async function generateContentWithBackoff(systemInstruction, userQuery) {
+            const payload = {
+                contents: [{ parts: [{ text: userQuery }] }],
+                systemInstruction: {
+                    parts: [{ text: systemInstruction }]
+                },
+            };
 
-        // --- CONSTANTS ---
-        const DEFAULT_CV_TEXT = 'Download CV (None Uploaded)';
-        const UPLOADED_CV_TEXT = 'Download CV';
-        
-        // --- FIREBASE PATH HELPERS ---
-        function getProfileDocRef() {
-            if (!db || !currentUserId) return null;
-            // Private path for settings/profile photo
-            return doc(db, `artifacts/${appId}/users/${currentUserId}/settings`, 'user_profile');
-        }
+            let lastError = null;
+            for (let i = 0; i < MAX_RETRIES; i++) {
+                try {
+                    const delay = Math.pow(2, i) * 1000 + Math.random() * 500;
+                    if (i > 0) await new Promise(resolve => setTimeout(resolve, delay));
 
-        function getCVDocRef() {
-            if (!db || !currentUserId) return null;
-            // Private path for CV file
-            return doc(db, `artifacts/${appId}/users/${currentUserId}/cv`, 'user_cv');
-        }
+                    const response = await fetch(API_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
 
-        // --- 1. PROFILE PHOTO UPLOAD/PERSISTENCE (Updated to use Firestore) ---
-        
-        document.getElementById('upload-photo-btn').addEventListener('click', () => {
-            document.getElementById('photo-upload-input').click();
-        });
-
-        document.getElementById('photo-upload-input').addEventListener('change', async function(event) {
-            const file = event.target.files[0];
-            if (!currentUserId) return showMessage('Authentication not ready. Please wait.', 'error');
-            
-            if (file && file.type.startsWith('image/')) {
-                if (file.size > 1024 * 1024 * 0.9) { // ~900KB limit for doc field size safety
-                    return showMessage('Photo file is too large. Please use an image under 900KB.', 'error');
-                }
-                const reader = new FileReader();
-                reader.onload = async function(e) {
-                    const base64Image = e.target.result;
-                    const profileRef = getProfileDocRef();
-                    
-                    try {
-                        showMessage('Uploading profile photo...', 'sending');
-                        await setDoc(profileRef, { photo: base64Image }, { merge: true });
-                        document.getElementById('profile-photo').src = base64Image;
-                        showMessage('Profile photo updated!', 'success');
-                    } catch (error) {
-                        console.error("Error setting profile photo:", error);
-                        showMessage('Error uploading photo. Check console.', 'error');
+                    if (!response.ok) {
+                        const errorBody = await response.json();
+                        throw new Error(`API Request failed with status ${response.status}: ${JSON.stringify(errorBody)}`);
                     }
-                };
-                reader.readAsDataURL(file);
-            } else if (file) {
-                 showMessage('Please select a valid image file (JPEG, PNG, etc.)', 'error');
-            }
-        });
 
-        // Use onSnapshot for real-time photo loading
-        function startPhotoListener() {
-            if (!currentUserId) return;
-            const profileRef = getProfileDocRef();
-            
-            onSnapshot(profileRef, (docSnap) => {
-                if (docSnap.exists() && docSnap.data().photo) {
-                    document.getElementById('profile-photo').src = docSnap.data().photo;
-                }
-            }, (error) => {
-                console.error("Error listening to profile photo:", error);
-            });
-        }
-
-
-        // --- 2. CV UPLOAD/DOWNLOAD/PERSISTENCE (Updated to use Firestore) ---
-
-        document.getElementById('cv-action-btn').addEventListener('click', async function(e) {
-            e.preventDefault();
-
-            if (!currentUserId) return showMessage('Authentication not ready. Please wait.', 'error');
-            
-            if (cvDataStored && cvDataStored.data) {
-                // DOWNLOAD logic
-                const filename = cvDataStored.filename || 'resume.pdf';
-                const link = document.createElement('a');
-                link.href = cvDataStored.data;
-                link.download = filename;
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            } else {
-                // UPLOAD trigger
-                document.getElementById('cv-upload-input').click();
-            }
-        });
-
-        document.getElementById('cv-upload-input').addEventListener('change', async function(event) {
-            const file = event.target.files[0];
-            if (!currentUserId) return showMessage('Authentication not ready. Please wait.', 'error');
-            
-            if (file && file.type === 'application/pdf') {
-                
-                // IMPORTANT: Check file size. Firestore documents have a 1MB limit.
-                if (file.size > 1024 * 1024 * 0.9) { 
-                    return showMessage('CV file is too large. Please use a PDF under 900KB.', 'error');
-                }
-
-                const reader = new FileReader();
-                reader.onload = async function(e) {
-                    const base64Data = e.target.result;
-                    const cvRef = getCVDocRef();
+                    const result = await response.json();
+                    const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
                     
-                    try {
-                        showMessage('Uploading CV to cloud storage...', 'sending');
-                        
-                        await setDoc(cvRef, { 
-                            data: base64Data, 
-                            filename: file.name 
-                        });
-                        
-                        // The onSnapshot listener (startCVListener) will handle the UI update
-                        showMessage(`Successfully uploaded ${file.name}. Click 'Download CV' to retrieve it.`, 'success');
-
-                    } catch (error) {
-                        console.error("Error setting CV data:", error);
-                        showMessage('Error uploading CV. File might be too big or check console.', 'error');
+                    if (text) {
+                        return text.trim();
+                    } else {
+                        throw new Error("Received empty text response from the API.");
                     }
-                };
-                reader.readAsDataURL(file);
-            } else if (file) {
-                 showMessage('Please select a valid PDF file for your CV/Resume.', 'error');
+
+                } catch (error) {
+                    lastError = error;
+                    console.error(`Attempt ${i + 1} failed:`, error.message);
+                }
             }
+            throw new Error(`Failed to generate content after ${MAX_RETRIES} attempts. Last error: ${lastError ? lastError.message : 'Unknown error'}`);
+        }
+
+        // Function to handle the generation request from the UI buttons
+        async function handleGeneration(systemPrompt) {
+            const inputElement = document.getElementById('ai-input');
+            const outputContainer = document.getElementById('ai-output-container');
+            const outputElement = document.getElementById('ai-output');
+            const loadingElement = document.getElementById('ai-loading');
+            const errorElement = document.getElementById('ai-error');
+            const taglineBtn = document.getElementById('generate-tagline-btn');
+            const summaryBtn = document.getElementById('generate-summary-btn');
+
+            const userQuery = inputElement.value.trim();
+
+            if (!userQuery) {
+                errorElement.textContent = 'Please enter some text or keywords to generate content.';
+                errorElement.classList.remove('hidden');
+                outputContainer.classList.add('hidden');
+                return;
+            }
+
+            // Reset UI
+            errorElement.classList.add('hidden');
+            outputContainer.classList.add('hidden');
+            outputElement.textContent = ''; // Clear previous output
+            loadingElement.classList.remove('hidden');
+            taglineBtn.disabled = true;
+            summaryBtn.disabled = true;
+
+            try {
+                const generatedText = await generateContentWithBackoff(systemPrompt, userQuery);
+                outputElement.textContent = generatedText;
+                outputContainer.classList.remove('hidden');
+            } catch (e) {
+                console.error('Final API error:', e);
+                errorElement.textContent = `Error: Could not generate content. Please try again.`;
+                errorElement.classList.remove('hidden');
+            } finally {
+                loadingElement.classList.add('hidden');
+                taglineBtn.disabled = false;
+                summaryBtn.disabled = false;
+            }
+        }
+
+        // Event Listeners for AI Buttons
+        document.getElementById('generate-tagline-btn').addEventListener('click', () => {
+            const systemPrompt = "You are a professional copywriter. Based on the user's input, generate a concise, highly professional, and inspiring single-sentence tagline or short job title/summary (max 12 words) suitable for a LinkedIn headline. Do not include any introductory phrases or explanations. Just the tagline.";
+            handleGeneration(systemPrompt);
         });
 
-        function updateCVButton(hasCV) {
-            const btn = document.getElementById('cv-action-btn');
-            if (hasCV) {
-                btn.textContent = UPLOADED_CV_TEXT;
-                btn.title = "Click to download your stored CV.";
-            } else {
-                btn.textContent = DEFAULT_CV_TEXT;
-                btn.title = "Click to upload your CV (PDF only).";
-            }
-        }
-
-        // Use onSnapshot for real-time CV data loading
-        function startCVListener() {
-            if (!currentUserId) return;
-            const cvRef = getCVDocRef();
-
-            onSnapshot(cvRef, (docSnap) => {
-                if (docSnap.exists() && docSnap.data().data) {
-                    cvDataStored = docSnap.data();
-                    updateCVButton(true);
-                } else {
-                    cvDataStored = null;
-                    updateCVButton(false);
-                }
-            }, (error) => {
-                console.error("Error listening to CV data:", error);
-                cvDataStored = null;
-                updateCVButton(false);
-            });
-        }
-
-
-        // --- 3. PROJECT MODAL FUNCTIONS (Unchanged) ---
-
-        function openModal(modalId) {
-            const modal = document.getElementById(modalId);
-            modal.classList.remove('hidden');
-            setTimeout(() => {
-                modal.classList.add('active');
-            }, 10);
-        }
-
-        function closeModal(modalId) {
-            const modal = document.getElementById(modalId);
-            modal.classList.remove('active');
-            setTimeout(() => {
-                modal.classList.add('hidden');
-            }, 300); 
-        }
-
-        // --- 4. CONTACT FORM (FORMSPREE INTEGRATION) (Unchanged) ---
-        
-        const form = document.getElementById('contact-form');
-        
-        form.addEventListener("submit", function(e) {
-            e.preventDefault();
-            
-            showMessage('Sending message...', 'sending');
-            
-            const data = new FormData(form);
-            
-            fetch(form.action, {
-                method: form.method,
-                body: data,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            }).then(response => {
-                if (response.ok) {
-                    showMessage('Message sent successfully! I will be in touch shortly.', 'success');
-                    form.reset();
-                } else {
-                    response.json().then(data => {
-                        if (Object.hasOwn(data, 'errors')) {
-                            showMessage(`Error: ${data["errors"].map(error => error["message"]).join(", ")}`, 'error');
-                        } else {
-                            showMessage('Oops! There was an issue submitting the form.', 'error');
-                        }
-                    })
-                }
-            }).catch(error => {
-                showMessage('Network error. Please try again later.', 'error');
-            });
+        document.getElementById('generate-summary-btn').addEventListener('click', () => {
+            const systemPrompt = "You are a professional career coach. Based on the user's input, write a clean, well-structured paragraph for the 'About Me' section of a professional portfolio (max 60 words). Ensure the tone is confident, professional, and focuses on impact and future goals. Do not include any introductory phrases or explanations. Just the paragraph.";
+            handleGeneration(systemPrompt);
         });
+
+        // Copy functionality
+        document.getElementById('copy-output-btn').addEventListener('click', function() {
+            const textToCopy = document.getElementById('ai-output').textContent;
+            
+            // Use document.execCommand('copy') as navigator.clipboard may not work in iframes
+            const textarea = document.createElement('textarea');
+            textarea.value = textToCopy;
+            document.body.appendChild(textarea);
+            textarea.select();
+            
+            try {
+                document.execCommand('copy');
+                this.textContent = 'Copied!';
+            } catch (err) {
+                console.error('Could not copy text: ', err);
+                this.textContent = 'Failed to copy!';
+            }
+            
+            document.body.removeChild(textarea);
+
+            setTimeout(() => {
+                this.textContent = 'Copy to Clipboard';
+            }, 2000);
+        });
+
+        // --- EXISTING JAVASCRIPT ---
         
-        // --- GENERAL UI FUNCTIONS (Unchanged) ---
-
-        function showMessage(text, type) {
-            const messageDiv = document.getElementById('form-message');
-            messageDiv.textContent = text;
-            messageDiv.classList.remove('hidden', 'text-indigo-600', 'text-red-500', 'text-gray-500');
-            
-            if (type === 'success') {
-                messageDiv.classList.add('text-indigo-600');
-            } else if (type === 'error') {
-                messageDiv.classList.add('text-red-500');
-            } else if (type === 'sending') {
-                messageDiv.classList.add('text-gray-500');
-            }
-            
-            if (type === 'success') {
-                 setTimeout(() => {
-                    messageDiv.classList.add('hidden');
-                }, 5000);
-            }
-        }
-
         // JavaScript for subtle fade-in animation on load
         function initFadeIn() {
             const items = document.querySelectorAll('.fade-in-item');
-            // FIX: Immediately make all content visible on load 
-            // to prevent empty screen if user doesn't scroll/scrolls too fast.
-            items.forEach((item) => {
-                item.classList.add('visible');
-            });
-            
-            // Re-implementing the original, staggered appearance for better aesthetics
             items.forEach((item, index) => {
                 setTimeout(() => {
                     item.classList.add('visible');
-                }, index * 100);
+                }, index * 100); // Stagger the animation slightly
             });
         }
         
-        // --- INITIALIZATION AND AUTH ---
-        async function initializeAppAndAuth() {
-            if (!firebaseConfig) {
-                console.error("Firebase configuration is missing.");
-                return; 
-            }
-
-            const app = initializeApp(firebaseConfig);
-            db = getFirestore(app);
-            auth = getAuth(app);
+        // Form Submission Handler (Prevents actual submission and shows a message)
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const messageDiv = document.getElementById('form-message');
+            messageDiv.classList.remove('hidden');
+            messageDiv.classList.add('text-primary-blue');
+            messageDiv.textContent = 'Thank you for your message! I will be in touch shortly.';
             
-            try {
-                if (initialAuthToken) {
-                    const userCredential = await signInWithCustomToken(auth, initialAuthToken);
-                    currentUserId = userCredential.user.uid;
-                } else {
-                    const userCredential = await signInAnonymously(auth);
-                    currentUserId = userCredential.user.uid;
-                }
-                
-                // Start the real-time listeners only after successful authentication
-                startCVListener();
-                startPhotoListener();
-                initFadeIn(); // Start UI effects after auth is ready
-
-            } catch (error) {
-                console.error("Firebase Authentication failed:", error);
-                // Set a temporary UUID if auth fails (though Firestore will likely fail without proper auth)
-                currentUserId = crypto.randomUUID(); 
-                showMessage('Warning: Failed to sign into Firebase. Data saving will not work.', 'error');
-            }
-        }
-
-        // Initialize on window load
-        window.onload = initializeAppAndAuth;
-
-        // Close modal when escape key is pressed (Unchanged)
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                document.querySelectorAll('.modal-overlay.active').forEach(modal => {
-                    closeModal(modal.id);
-                });
-            }
+            // Clear the form after a successful "submission"
+            e.target.reset();
+            
+            // Hide the message after 5 seconds
+            setTimeout(() => {
+                messageDiv.classList.add('hidden');
+            }, 5000);
         });
+
+        // Initialize fade-in once the content is loaded
+        window.onload = initFadeIn;
     </script>
 </body>
 </html>
