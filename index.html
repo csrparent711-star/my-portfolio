@@ -627,6 +627,13 @@
         // JavaScript for subtle fade-in animation on load
         function initFadeIn() {
             const items = document.querySelectorAll('.fade-in-item');
+            // FIX: Immediately make all content visible on load 
+            // to prevent empty screen if user doesn't scroll/scrolls too fast.
+            items.forEach((item) => {
+                item.classList.add('visible');
+            });
+            
+            // Re-implementing the original, staggered appearance for better aesthetics
             items.forEach((item, index) => {
                 setTimeout(() => {
                     item.classList.add('visible');
